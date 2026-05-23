@@ -1,0 +1,45 @@
+@page
+@model MyApp.Pages.ProductRequests.PendingModel
+@{
+    ViewData["Title"] = "Pending Requests";
+}
+
+<h4>Pending Requests</h4>
+
+<table id="pendingTable" class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Product</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Remark</th>
+            <th>Requested By</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model.Requests)
+        {
+            <tr>
+                <td>@r.Id</td>
+                <td>@r.Product.Name</td>
+                <td>@r.RequestType</td>
+                <td>@r.RequestedQuantity</td>
+                <td>@r.Remark</td>
+                <td>@r.CreatedBy</td>
+                <td>@r.CreatedAt.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a asp-page="./Review" asp-route-id="@r.Id" class="btn btn-sm btn-warning">Review</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () { $('#pendingTable').DataTable({ order: [[6, 'asc']] }); });
+    </script>
+}

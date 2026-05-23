@@ -1,0 +1,46 @@
+@page "{id:int}"
+@model MyApp.Pages.ProductRequests.ReviewModel
+@{
+    ViewData["Title"] = "Review Request";
+}
+
+<h4>Review Request #@Model.ProductRequest.Id</h4>
+
+<div class="card mb-4" style="max-width:600px;">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-4">Product</dt>
+            <dd class="col-sm-8">@Model.ProductRequest.Product.Name (Current Qty: @Model.ProductRequest.Product.Quantity)</dd>
+
+            <dt class="col-sm-4">Request Type</dt>
+            <dd class="col-sm-8">@Model.ProductRequest.RequestType</dd>
+
+            <dt class="col-sm-4">Requested Quantity</dt>
+            <dd class="col-sm-8">@Model.ProductRequest.RequestedQuantity</dd>
+
+            <dt class="col-sm-4">Remark</dt>
+            <dd class="col-sm-8">@Model.ProductRequest.Remark</dd>
+
+            <dt class="col-sm-4">Requested By</dt>
+            <dd class="col-sm-8">@Model.ProductRequest.CreatedBy</dd>
+
+            <dt class="col-sm-4">Date</dt>
+            <dd class="col-sm-8">@Model.ProductRequest.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="card" style="max-width:600px;">
+    <div class="card-body">
+        <h5>Decision</h5>
+        <form method="post">
+            <div class="mb-3">
+                <label for="reviewRemark" class="form-label">Remark</label>
+                <textarea name="reviewRemark" id="reviewRemark" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" asp-page-handler="Approve" class="btn btn-success me-2">Approve</button>
+            <button type="submit" asp-page-handler="Reject" class="btn btn-danger me-2">Reject</button>
+            <a asp-page="./Pending" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+</div>

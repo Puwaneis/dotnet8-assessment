@@ -1,0 +1,46 @@
+@page
+@model MyApp.Pages.ProductRequests.CreateModel
+@{
+    ViewData["Title"] = "New Quantity Request";
+}
+
+<h4>New Quantity Request</h4>
+
+<div class="card" style="max-width:500px;">
+    <div class="card-body">
+        <form method="post">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger py-2 px-3 mb-3" style="font-size:0.875rem;">
+                    <div asp-validation-summary="ModelOnly"></div>
+                </div>
+            }
+            <div class="mb-3">
+                <label asp-for="NewRequest.ProductId" class="form-label">Product</label>
+                <select asp-for="NewRequest.ProductId" asp-items="Model.ProductSelectList" class="form-select">
+                    <option value="">-- Select Product --</option>
+                </select>
+                <span asp-validation-for="NewRequest.ProductId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewRequest.RequestType" class="form-label">Request Type</label>
+                <select asp-for="NewRequest.RequestType" asp-items="Html.GetEnumSelectList<RequestType>()" class="form-select"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewRequest.RequestedQuantity" class="form-label">Quantity</label>
+                <input asp-for="NewRequest.RequestedQuantity" class="form-control" type="number" min="1" />
+                <span asp-validation-for="NewRequest.RequestedQuantity" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewRequest.Remark" class="form-label">Remark</label>
+                <textarea asp-for="NewRequest.Remark" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Save as Draft</button>
+            <a asp-page="./Index" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,16 @@
+@page
+@model MyApp.Pages.ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="text-center mt-5">
+    <h2 class="text-danger">An error occurred</h2>
+    <p>An unexpected error has occurred. Please try again.</p>
+    <p>If this problem persists, please contact the system administrator.</p>
+    @if (Model.RequestId != null)
+    {
+        <p class="text-muted small">Request ID: @Model.RequestId</p>
+    }
+    <a asp-page="/Home" class="btn btn-primary mt-3">Back to Home</a>
+</div>

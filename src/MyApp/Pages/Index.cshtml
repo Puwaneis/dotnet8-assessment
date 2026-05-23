@@ -1,0 +1,89 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="mb-4">
+    <h4 class="fw-semibold mb-1">Welcome, @User.Identity?.GetFullName()</h4>
+    <p class="text-muted mb-0">Signed in as <strong>@User.Identity?.Name</strong></p>
+</div>
+
+<div class="p-4 mb-4 rounded-3" style="background:#f8f9fa; border:1px solid #e9ecef;">
+    <div class="d-flex align-items-center gap-3 mb-2">
+        <div class="rounded-2 d-flex align-items-center justify-content-center" style="width:44px;height:44px;background:#343a40;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm.5 4.5v3.793l2.354 2.353-.708.708L7.5 8.707V4.5h1z"/>
+            </svg>
+        </div>
+        <div>
+            <div class="fw-semibold fs-5">dotnet8 Boilerplate</div>
+            <div class="text-muted small">.NET 8 · Razor Pages · ASP.NET Core Identity · EF Core · NLog</div>
+        </div>
+    </div>
+    <p class="mb-0 text-muted" style="max-width:600px;">
+        A production-ready starting point for internal web applications — authentication, role-based access, audit logging, and a clean project structure, all pre-wired.
+    </p>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small fw-semibold text-uppercase mb-2">Authentication</div>
+                <div class="fw-semibold mb-1">ASP.NET Core Identity</div>
+                <p class="text-muted small mb-3">Email confirmation, secure password hashing, and custom claims out of the box.</p>
+                <a asp-page="/Admin/Users" class="btn btn-sm btn-outline-secondary">Manage Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small fw-semibold text-uppercase mb-2">Data</div>
+                <div class="fw-semibold mb-1">Entity Framework Core</div>
+                <p class="text-muted small mb-3">SQLite by default, SQL Server-ready. Migrations, seeding, and audit logging included.</p>
+                <a asp-page="/Products/Index" class="btn btn-sm btn-outline-secondary">View Products</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small fw-semibold text-uppercase mb-2">Observability</div>
+                <div class="fw-semibold mb-1">NLog</div>
+                <p class="text-muted small mb-3">Environment-aware logging — colored console in development, file-only in production.</p>
+                <span class="badge bg-success">Active</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small fw-semibold text-uppercase mb-2">Requests</div>
+                <div class="fw-semibold mb-1">Product Requests</div>
+                <p class="text-muted small mb-3">Submit and track quantity change requests with a built-in approval workflow.</p>
+                <div class="d-flex gap-2">
+                    <a asp-page="/ProductRequests/Create" class="btn btn-sm btn-primary">New Request</a>
+                    <a asp-page="/ProductRequests/Index" class="btn btn-sm btn-outline-secondary">My Requests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (User.IsInRole(AppRoles.Manager) || User.IsInRole(AppRoles.Admin))
+    {
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small fw-semibold text-uppercase mb-2">Review</div>
+                    <div class="fw-semibold mb-1">Pending Approvals</div>
+                    <p class="text-muted small mb-3">Review and approve or reject submitted product quantity requests.</p>
+                    <a asp-page="/ProductRequests/Pending" class="btn btn-sm btn-warning">Review Requests</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

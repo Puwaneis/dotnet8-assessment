@@ -1,0 +1,52 @@
+@page
+@model MyApp.Pages.Admin.UsersModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h4>Users</h4>
+
+<table id="usersTable" class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th>Suspended</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model.Users)
+        {
+            <tr>
+                <td>@u.Email</td>
+                <td>@u.FullName</td>
+                <td>@u.Role</td>
+                <td>@(u.IsActive ? "Yes" : "No")</td>
+                <td>@(u.IsSuspended ? "Yes" : "No")</td>
+                <td>
+                    <form method="post" asp-page-handler="ToggleActive" style="display:inline;">
+                        <input type="hidden" name="userId" value="@u.Id" />
+                        <button type="submit" class="btn btn-sm @(u.IsActive ? "btn-warning" : "btn-success")">
+                            @(u.IsActive ? "Deactivate" : "Activate")
+                        </button>
+                    </form>
+                    <form method="post" asp-page-handler="ToggleSuspend" style="display:inline;">
+                        <input type="hidden" name="userId" value="@u.Id" />
+                        <button type="submit" class="btn btn-sm @(u.IsSuspended ? "btn-success" : "btn-danger")">
+                            @(u.IsSuspended ? "Unsuspend" : "Suspend")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () { $('#usersTable').DataTable(); });
+    </script>
+}

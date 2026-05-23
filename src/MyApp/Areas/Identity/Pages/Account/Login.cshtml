@@ -1,0 +1,66 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Sign in";
+    Layout = "_AuthLayout";
+}
+
+<div class="mb-4">
+    <h1 class="fw-bold mb-1" style="font-size:1.5rem;">Sign in</h1>
+    <p class="text-muted mb-0" style="font-size:0.9rem;">Enter your credentials to continue</p>
+</div>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger py-2 px-3 mb-3" style="font-size:0.875rem;">
+        <div asp-validation-summary="ModelOnly"></div>
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Input.Email" class="form-label fw-medium" style="font-size:0.875rem;">Email</label>
+        <input asp-for="Input.Email"
+               class="form-control"
+               autocomplete="username"
+               placeholder="you@example.com"
+               style="font-size:0.9rem;" />
+        <span asp-validation-for="Input.Email" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+            <label asp-for="Input.Password" class="form-label fw-medium mb-0" style="font-size:0.875rem;">Password</label>
+            <a asp-page="./ForgotPassword" class="text-decoration-none" style="font-size:0.8rem;color:#6b7280;">Forgot password?</a>
+        </div>
+        <input asp-for="Input.Password"
+               class="form-control"
+               autocomplete="current-password"
+               placeholder="••••••••"
+               style="font-size:0.9rem;" />
+        <span asp-validation-for="Input.Password" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-4">
+        <div class="form-check">
+            <input asp-for="Input.RememberMe" class="form-check-input" />
+            <label asp-for="Input.RememberMe" class="form-check-label text-muted" style="font-size:0.875rem;">Remember me</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-dark w-100 py-2 fw-medium">
+        Sign in
+    </button>
+
+    <input type="hidden" asp-for="ReturnUrl" />
+</form>
+
+<hr class="my-4" style="border-color:#f0f0f0;" />
+
+<p class="text-center text-muted mb-0" style="font-size:0.82rem;">
+    Don't have an account? <a asp-page="./Register" class="text-decoration-none fw-medium text-dark">Register</a>
+</p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
