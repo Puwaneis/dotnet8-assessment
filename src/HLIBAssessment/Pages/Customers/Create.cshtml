@@ -1,0 +1,36 @@
+﻿@page
+@model HLIBAssessment.Pages.Customers.CreateModel
+@{
+    ViewData["Title"] = "Add Customer";
+}
+
+<h4>Add Customer</h4>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="card" style="max-width:500px;">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="NewCustomer.Username" class="form-label">Username</label>
+                <input asp-for="NewCustomer.Username" class="form-control" />
+                <span asp-validation-for="NewCustomer.Username" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewCustomer.Email" class="form-label">Email</label>
+                <input asp-for="NewCustomer.Email" class="form-control" type="email" />
+                <span asp-validation-for="NewCustomer.Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewCustomer.PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="NewCustomer.PhoneNumber" class="form-control" />
+                <span asp-validation-for="NewCustomer.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a asp-page="./Index" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

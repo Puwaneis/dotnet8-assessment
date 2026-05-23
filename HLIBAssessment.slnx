@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/HLIBAssessment/HLIBAssessment.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/HLIBAssessment.Tests/HLIBAssessment.Tests.csproj" />
+  </Folder>
+</Solution>

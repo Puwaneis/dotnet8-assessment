@@ -1,0 +1,22 @@
+﻿@page "{id:guid}"
+@using HLIBAssessment.Common
+@model HLIBAssessment.Pages.Customers.DeleteModel
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<h4>Delete Customer</h4>
+<div class="alert alert-danger">Are you sure you want to delete <strong>@Model.Customer.Username</strong>?</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a asp-page="./Index" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+
+
+<div class="sidebar-heading">Customers</div>
+<a asp-page="/Customers/Index">All Customers</a>
+@if (User.IsInRole(AppRoles.Admin))
+{
+    <a asp-page="/Customers/Create">Add Customer</a>
+}

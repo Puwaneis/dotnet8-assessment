@@ -1,0 +1,43 @@
+﻿@page "{id:guid}"
+@model HLIBAssessment.Pages.Customers.EditModel
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+
+<h4>Edit Customer</h4>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="card" style="max-width:500px;">
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Customer.Id" />
+            <div class="mb-3">
+                <label asp-for="Customer.Username" class="form-label">Username</label>
+                <input asp-for="Customer.Username" class="form-control" />
+                <span asp-validation-for="Customer.Username" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Customer.Email" class="form-label">Email</label>
+                <input asp-for="Customer.Email" class="form-control" type="email" />
+                <span asp-validation-for="Customer.Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Customer.PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="Customer.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Customer.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input asp-for="Customer.Status" class="form-check-input" type="checkbox" />
+                    <label asp-for="Customer.Status" class="form-check-label">Active</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-page="./Index" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
